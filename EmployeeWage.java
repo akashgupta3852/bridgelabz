@@ -26,6 +26,7 @@ public class EmployeeWage implements IComputeEmpWage{
 		int empHrs=0;
 		int totalEmpHrs=0;
 		int totalWorkingDays=0;
+		int dailyWage=0;
 
 		//computation
 		while(totalEmpHrs<=employee.maxHrsPerMonth && totalWorkingDays<employee.numOfWorkingDays)
@@ -43,8 +44,9 @@ public class EmployeeWage implements IComputeEmpWage{
 				default:
 					empHrs=0;
 			}
+			dailyWage=empHrs*employee.empRatePerHour;
 			totalEmpHrs+=empHrs;
-			System.out.println("Day#: "+totalWorkingDays+" Emp Hr: "+empHrs);
+			System.out.println("Day#: "+totalWorkingDays+" Emp Hr: "+empHrs+" Daily Wage: "+dailyWage);
 		}
 		employee.totalEmpWage=totalEmpHrs*employee.empRatePerHour;
 	}
