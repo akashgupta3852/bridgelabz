@@ -16,8 +16,6 @@ public class EmployeeWage{
 	}
 
 	public void computeEmpWage(){
-		System.out.println("Welcome to Employee Wage Computation Program");
-		
 		//variables
 		int empHrs=0;
 		int totalEmpHrs=0;
@@ -51,6 +49,7 @@ public class EmployeeWage{
 	}
 
 	public static void main(String[] args){
+		System.out.println("Welcome to Employee Wage Computation Program");
 		EmployeeWage dMart=new EmployeeWage("DMart",20,2,10);
 		EmployeeWage reliance=new EmployeeWage("Reliance",10,4,20);
 		dMart.computeEmpWage();
