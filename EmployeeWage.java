@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class EmployeeWage implements IComputeEmpWage{
 	//constants
 	public static final int IS_PART_TIME=1; 
@@ -5,22 +7,17 @@ public class EmployeeWage implements IComputeEmpWage{
 
 	//variables
 	public int numOfCompany=0;
-	public CompanyEmpWage[] companyEmpWageArray;
-	
-	public EmployeeWage(){
-		companyEmpWageArray=new CompanyEmpWage[5];
-	}
+	public List<CompanyEmpWage> companyEmpWageList=new ArrayList<CompanyEmpWage>();
 
 	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth){
-		companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHrsPerMonth);
-		numOfCompany++;
+		CompanyEmpWage employee=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHrsPerMonth);
+		companyEmpWageList.add(employee);
 	}
 		
 	public void computeEmpWage(){
-		for(int i=0;i<numOfCompany;i++){
-			CompanyEmpWage emp=companyEmpWageArray[i];
-			this.computeEmpWage(emp);
-			System.out.println(emp);
+		for(CompanyEmpWage employee:companyEmpWageList){
+			this.computeEmpWage(employee);
+			System.out.println(employee);
 		}
 	}
 
