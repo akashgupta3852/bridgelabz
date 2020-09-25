@@ -4,27 +4,34 @@ public class EmployeeWage{
 	public static final int IS_FULL_TIME=2;  
 
 	//variables
-	public String company;
-	public int empRatePerHour, numOfWorkingDays, maxHrsPerMonth,totalEmpWage;
-		
-	//constructor
-	public EmployeeWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth){
-		this.company=company;
-		this.empRatePerHour=empRatePerHour;
-		this.numOfWorkingDays=numOfWorkingDays;
-		this.maxHrsPerMonth=maxHrsPerMonth;
+	public int numOfCompany=0;
+	public CompanyEmpWage[] companyEmpWageArray;
+	
+	public EmployeeWage(){
+		companyEmpWageArray=new CompanyEmpWage[5];
 	}
 
-	public void computeEmpWage(){
-		System.out.println("Welcome to Employee Wage Computation Program");
+	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth){
+		companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHrsPerMonth);
+		numOfCompany++;
+	}
 		
+	public void computeEmpWage(){
+		for(int i=0;i<numOfCompany;i++){
+			CompanyEmpWage emp=companyEmpWageArray[i];
+			this.computeEmpWage(emp);
+			System.out.println(emp);
+		}
+	}
+
+	public void computeEmpWage(CompanyEmpWage employee){
 		//variables
 		int empHrs=0;
 		int totalEmpHrs=0;
 		int totalWorkingDays=0;
 
 		//computation
-		while(totalEmpHrs<=maxHrsPerMonth && totalWorkingDays<numOfWorkingDays)
+		while(totalEmpHrs<=employee.maxHrsPerMonth && totalWorkingDays<employee.numOfWorkingDays)
 		{
 			totalWorkingDays++;
 			double empCheck=Math.floor(Math.random()*10)%3;
@@ -42,20 +49,16 @@ public class EmployeeWage{
 			totalEmpHrs+=empHrs;
 			System.out.println("Day#: "+totalWorkingDays+" Emp Hr: "+empHrs);
 		}
-		totalEmpWage=totalEmpHrs*empRatePerHour;
+		employee.totalEmpWage=totalEmpHrs*employee.empRatePerHour;
 	}
 	
-	@Override
-	public String toString(){
-		return "Total Emp Wage for "+company+" is: "+totalEmpWage;
-	}
+	
 
 	public static void main(String[] args){
-		EmployeeWage dMart=new EmployeeWage("DMart",20,2,10);
-		EmployeeWage reliance=new EmployeeWage("Reliance",10,4,20);
-		dMart.computeEmpWage();
-		System.out.println(dMart);
-		reliance.computeEmpWage();
-		System.out.println(reliance);
+		System.out.println("Welcome to Employee Wage Computation Program");
+		EmployeeWage empWage=new EmployeeWage();
+		empWage.addCompanyEmpWage("DMart",20,2,10);	
+		empWage.addCompanyEmpWage("Reliance",10,4,20);
+		empWage.computeEmpWage();
 	}
 }
