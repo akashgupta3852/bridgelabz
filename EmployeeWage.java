@@ -6,8 +6,6 @@ public class EmployeeWage{
 	public static final int MAX_HRS_IN_MONTH=100;
 
 	public static int computeEmpWage(){
-		System.out.println("Welcome to Employee Wage Computation Program");
-		
 		//variables
 		int empHrs=0;
 		int totalEmpHrs=0;
@@ -37,7 +35,8 @@ public class EmployeeWage{
 		return totalEmpWage;
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args){		
+		System.out.println("Welcome to Employee Wage Computation Program");
 		computeEmpWage();
 	}
 }
