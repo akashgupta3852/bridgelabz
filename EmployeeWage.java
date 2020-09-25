@@ -6,12 +6,13 @@ public class EmployeeWage implements IComputeEmpWage{
 	public static final int IS_FULL_TIME=2;  
 
 	//variables
-	public int numOfCompany=0;
 	public List<CompanyEmpWage> companyEmpWageList=new ArrayList<CompanyEmpWage>();
+	public Map<String,CompanyEmpWage> companyToEmpWageMap=new HashMap<>();
 
 	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth){
 		CompanyEmpWage employee=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHrsPerMonth);
 		companyEmpWageList.add(employee);
+		companyToEmpWageMap.put(company,employee);
 	}
 		
 	public void computeEmpWage(){
@@ -19,6 +20,16 @@ public class EmployeeWage implements IComputeEmpWage{
 			this.computeEmpWage(employee);
 			System.out.println(employee);
 		}
+	}
+
+	public int getTotalWage(String company){
+		for(String compName:companyToEmpWageMap.keySet()){
+			if(company.equals(compName)){
+				CompanyEmpWage employee=companyToEmpWageMap.get(compName);
+				return employee.totalEmpWage;
+			}
+		}
+		return 0;
 	}
 
 	public void computeEmpWage(CompanyEmpWage employee){
@@ -59,5 +70,6 @@ public class EmployeeWage implements IComputeEmpWage{
 		empWage.addCompanyEmpWage("DMart",20,2,10);	
 		empWage.addCompanyEmpWage("Reliance",10,4,20);
 		empWage.computeEmpWage();
+		System.out.println("Total Wage for Reliance Company: "+empWage.getTotalWage("Reliance"));
 	}
 }
